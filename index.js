@@ -115,13 +115,6 @@ var ModalBox = createReactClass({
   componentWillMount: function() {
     this.createPanResponder();
     this.handleOpenning(this.props);
-    // Needed for IOS because the keyboard covers the screen
-    if (Platform.OS === 'ios') {
-      this.subscriptions = [
-        Keyboard.addListener('keyboardWillChangeFrame', this.onKeyboardChange),
-        Keyboard.addListener('keyboardDidHide', this.onKeyboardHide)
-      ];
-    }
   },
 
   componentWillUnmount: function() {
@@ -143,27 +136,6 @@ var ModalBox = createReactClass({
   },
 
   /****************** ANIMATIONS **********************/
-
-  /*
-   * The keyboard is hidden (IOS only)
-   */
-  onKeyboardHide: function(evt) {
-    this.setState({ keyboardOffset: 0 });
-  },
-
-  /*
-   * The keyboard frame changed, used to detect when the keyboard open, faster than keyboardDidShow (IOS only)
-   */
-  onKeyboardChange: function(evt) {
-    if (!evt) return;
-    if (!this.state.isOpen) return;
-    var keyboardFrame = evt.endCoordinates;
-    var keyboardHeight = this.state.containerHeight - keyboardFrame.screenY;
-
-    this.setState({ keyboardOffset: keyboardHeight }, () => {
-      this.animateOpen();
-    });
-  },
 
   /*
    * Open animation for the backdrop, will fade in
