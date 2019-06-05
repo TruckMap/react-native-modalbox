@@ -19,7 +19,7 @@ var {
 
 var createReactClass = require('create-react-class');
 
-var BackButton = BackHandler || BackAndroid;
+var BackButton = BackHandler;
 
 var screen = Dimensions.get('window');
 
