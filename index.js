@@ -10,7 +10,6 @@ var {
   TouchableWithoutFeedback,
   Dimensions,
   Easing,
-  BackAndroid,
   BackHandler,
   Platform,
   Modal,
